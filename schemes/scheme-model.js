@@ -40,10 +40,15 @@ function findById(id) {
   }
   
   function add(scheme) {
+      console.log('add',scheme)
     return db('schemes') // remember to return the call to db()
     .insert(scheme)
     .then(ids => {
-     return ids
+        console.log('ids',ids)
+        if (ids[0])
+     return findById(ids[0])
+     else
+     return null
   })
   }
 
@@ -57,7 +62,7 @@ function findById(id) {
            return schemes;
          });
      }
-   
+
      function remove(id) {
         const oldScheme = findById(id)
            return db('schemes') // remember to return the call to db()
