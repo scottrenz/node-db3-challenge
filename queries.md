@@ -2,7 +2,14 @@
 
 ### Display the ProductName and CategoryName for all products in the database. Shows 76 records.
 
+select productname, categoryname from products as p left join categories as c on p.categoryid = c.categoryid union select productname, categoryname from products as p right join categories as c on p.categoryid = c.categoryid
+
 ### Display the OrderID and ShipperName for all orders placed before January 9, 1997. Shows 161 records.
+
+select * from orders as o
+left join shippers as s
+on o.shipperid = s.shipperid
+where orderdate < (select orderdate from orders where orderid =10409)
 
 ### Display all ProductNames and Quantities placed on order 10251. Sort by ProductName. Shows 3 records.
 
