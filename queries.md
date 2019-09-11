@@ -11,6 +11,12 @@ left join shippers as s
 on o.shipperid = s.shipperid
 where orderdate < (select orderdate from orders where orderid =10409)
 
+select * from orders as o
+left join shippers as s
+on o.shipperid = s.shipperid
+where FORMAT(orderdate , 'yyyyMMdd') < '19970109'
+
+
 ### Display all ProductNames and Quantities placed on order 10251. Sort by ProductName. Shows 3 records.
 
 select ProductName, Quantity from products as p
