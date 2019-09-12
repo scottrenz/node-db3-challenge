@@ -52,7 +52,10 @@ function findById(id) {
 function getmax(idn) {
     return db.select('mstep').from('stepmax').where({scheme_id: idn})
     .then(result => {
-    return result
+      if(result.length > 0)
+      return result
+     else
+     return [{mstep: 0}] 
 }
  )
 }
