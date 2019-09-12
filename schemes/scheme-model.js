@@ -17,15 +17,16 @@ function find() {
 }
 
 function findById(id) {
-    console.log('findbyid',id)
     return db('schemes') // remember to return the call to db()
       .where({ id: id })
       .then(schemes => {
-        console.log('findbyid return schemes',schemes)
-        return schemes;
+        if (schemes.length === 0)
+        return null
+        else
+        return schemes
       });
   }
-  
+
   function findSteps(id) {
     return db('schemesteps') // remember to return the call to db()
       .where({ scheme_id: id })
@@ -40,25 +41,18 @@ function findById(id) {
   }
   
   function add(scheme) {
-      console.log('add',scheme)
     return db('schemes') // remember to return the call to db()
     .insert(scheme)
     .then(ids => {
-        console.log('ids',ids)
-        if (ids[0])
      return findById(ids[0])
-     else
-     return null
   })
   }
 
   function update(changes,id) {
-    console.log('changes',changes)
        return db('schemes') // remember to return the call to db()
        .where({ id: id })
        .update(changes)
        .then(schemes => {
-           console.log('scheme',schemes)
            return schemes;
          });
      }

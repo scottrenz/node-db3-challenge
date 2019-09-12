@@ -32,8 +32,6 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/steps', (req, res) => {
   const { id } = req.params;
-  console.log('step params',req.params)
-  console.log('step params id',id)
   Schemes.findSteps(id)
   .then(steps => {
     if (steps.length) {
@@ -79,13 +77,11 @@ router.post('/:id/steps', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  console.log('put',req.body,req.params)
   const { id } = req.params;
   const changes = req.body;
 
   Schemes.findById(id)
   .then(scheme => {
-    console.log('put after findbyid',scheme)
   
     if (scheme) {
       Schemes.update(changes, id)
