@@ -6,7 +6,8 @@ module.exports = {
     findSteps,
     add,
     update,
-    remove
+    remove,
+    addStep
 };
 
 function find() {
@@ -47,6 +48,27 @@ function findById(id) {
      return findById(ids[0])
   })
   }
+
+function getmax(idn) {
+    return db.select('mstep').from('stepmax').where({scheme_id: idn})
+    .then(result => {
+    return result
+}
+ )
+}
+
+  function addStep(scheme,idn) {
+    scheme.scheme_id = idn
+    return getmax(idn)
+    .then( result => {
+        scheme.step_number = result[0].mstep + 1
+        return db('steps') // remember to return the call to db()
+     .insert(scheme)
+    .then(ids => {
+     return scheme
+  })
+})
+}
 
   function update(changes,id) {
        return db('schemes') // remember to return the call to db()
